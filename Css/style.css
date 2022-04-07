@@ -1,0 +1,23 @@
+.LoginLink , .ConnexionLinks {
+    text-decoration: none;
+}
+.LoginLink {
+    color: white;
+}
+.ConnexionLinks {
+    color: #5100FF;
+}
+
+.AccueilContent {
+    height: 75vh;
+}
+
+
+#ConnexImage {
+    width: 25rem;
+}
+.signUpBtn {
+    background-color: #5100FF;
+    color: white;
+}
+
