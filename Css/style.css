@@ -1,3 +1,4 @@
+
 .LoginLink , .ConnexionLinks {
     text-decoration: none;
 }
@@ -19,5 +20,18 @@
 .signUpBtn {
     background-color: #5100FF;
     color: white;
+}
+
+.Img2 {
+    height: 90vh;
+}
+
+.Form {
+    height: 70vh;
+}
+
+.TableCaption{
+    font-weight: bolder;
+    font-size: 2rem;
 }
 
