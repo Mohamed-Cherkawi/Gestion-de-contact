@@ -23,7 +23,7 @@
     <div class=" container d-flex">
 
       <!-- Form -->
-    <form method="POST" id="form" class="p-4 mt-5 ms-3  shadow rounded w-50 Form">
+    <form method="POST" action="includes/logIn.inc.php" id="form" class="p-4 mt-5 ms-3  shadow rounded w-50 Form">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Username</label>
           <input type="text" class="form-control" id="usernameInput" aria-describedby="emailHelp" placeholder="Username" name="Username" max="20" onkeyup="validateUsername()">
@@ -46,7 +46,11 @@
       </div>
      
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-  <script src="Js/submit.js"></script>
+  <script>
+    if(window.history.replaceState) {
+    window.history.replaceState(null , null ,window.location.href);
+}
+  </script>
   <script src="Js/script2.js"></script>
 </body>
 </html>

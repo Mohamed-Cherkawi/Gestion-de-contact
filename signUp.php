@@ -1,35 +1,4 @@
-<!-- <?php
-include "connection.php";
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}else {
-  $ConnMessage = "Connected";
-}
-if (isset($_POST['SignUp'])) {
-  // Data Collection from Post Method .
-  $username          =     $_POST['Username'];
-  $password          =     $_POST['Password'];
-
-  // Data insertion to users table .
-    $sql = " INSERT INTO `users`(`Username`,`Password`)
-    VALUES ('$username','$password') ";
-    
-    $query = $conn->query($sql) ;
-    if ($query) {
-     function newRecord() {
-      echo   '<div class="alert alert-success" role="alert">
-              Your Account has Succesfuly Created
-              </div>';
-     }
-    } else {
-      echo  "Error" . $sql . "<br>" . $conn->error;
-    }
-    
-    $conn->close();
- 
-}
-?> -->
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -59,7 +28,7 @@ if (isset($_POST['SignUp'])) {
     <div class="container d-flex">
 
       <!-- Form -->
-    <form method="POST" id="form" class="p-4 mt-5 Form shadow rounded w-50">
+    <form method="POST" action="includes/signUp.inc.php" id="form" class="p-4 mt-5 Form shadow rounded w-50">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Username</label>
           <input type="text" class="form-control" id="usernameInput" aria-describedby="emailHelp" placeholder="Username" name="Username" onkeyup="validateUserName()">
@@ -77,10 +46,6 @@ if (isset($_POST['SignUp'])) {
           </div>
         <button type="submit" class="btn signUpBtn w-100" name="SignUp" onclick="return validateForm()">Sign up</button>
         <span id="SubmitError" class="text-danger"></span>
-         <?php
-        if(function_exists('newRecord'))
-          echo newRecord();
-        ?> 
         <div class="pt-4">
             <span>Already have an account? <a href="login.php" class="ConnexionLinks">Login </a>here</span>
         </div>
@@ -91,7 +56,11 @@ if (isset($_POST['SignUp'])) {
   
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-  <script src="Js/submit.js"></script>
+  <script>
+    if(window.history.replaceState) {
+    window.history.replaceState(null , null ,window.location.href);
+}
+  </script>  
   <script src="Js/script.js"></script>
 </body>
 </html>

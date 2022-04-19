@@ -1,3 +1,7 @@
+<?php
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,8 +18,8 @@
     <div class="container-fluid d-flex justify-content-between">
         <span class="navbar-brand ">Contacts list</span>
         <div>
-                <span class="me-4" style="color: azure;">Mohamed</span>
-                <a href="Contact.html" class="LoginLink text-secondary me-2">Contact</a>
+                <span class="me-4" style="color: azure;"><?php if(isset($_SESSION['userName'])) {echo $_SESSION['userName'] ;} ?></span>
+                <a href="Contact.php" class="LoginLink text-secondary me-2">Contact</a>
                 <a href="login.php" class="LoginLink text-secondary">Log out</a>
         </div>
     </div>
@@ -24,7 +28,7 @@
 
 <div class="container mt-5">
 <h1>
-        Welcome , Mohamed !
+        Welcome , <?php if(isset($_SESSION['userName'])) {echo $_SESSION['userName'] ;} ?> !
 </h1>
     
 <table class="table caption-top mt-3 ">
@@ -33,17 +37,17 @@
       <tr>
         <th scope="row">Username</th>
        
-        <td>Otto</td>
+        <td><?php if(isset($_SESSION['userName'])) {echo $_SESSION['userName'] ;} ?></td>
         <td></td>
       </tr>
       <tr>
-        <th scope="row">Signup date</th>
-        <td>Otto</td>
+        <th scope="row">Signup Date</th>
+        <td><?php if(isset($_SESSION['signupD'])) {echo $_SESSION['signupD'] ;} ?></td>
         <td></td>
       </tr>
       <tr>
         <th scope="row">Last Login</th>
-        <td>Otto</td>
+        <td><?php if(isset($_SESSION['lastLogin'])) { echo $_SESSION['lastLogin'] ;} ?></td>
         <td></td>
       </tr>
     </tbody>

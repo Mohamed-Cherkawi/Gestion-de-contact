@@ -1,3 +1,7 @@
+<?php
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +18,7 @@
     <div class="container-fluid d-flex justify-content-between">
         <span class="navbar-brand ">Contacts list</span>
         <div>
-                <span style="color: azure;">Mohamed</span>
+                <span class="me-4" style="color: azure;"><?php if(isset($_SESSION['userName'])) {echo $_SESSION['userName'] ;} ?></span>
                 <a href="login.php" class="LoginLink text-secondary">Log out</a>
         </div>
     </div>
@@ -26,7 +30,7 @@
         Contacts
 </h1>
     <!-- Form -->
-          <form method="POST">
+          <form method="POST" action="includes/contactCrud.inc.php">
              <div class="d-flex mt-4">
               <div class="mb-3 w-25">
                 <label for="exampleFormControlInput1" class="form-label d-block">Enter Your Name</label>
@@ -44,32 +48,18 @@
               </div>
               <div>
                 <label for="adreess">Adreess</label>
-                <textarea id="adreess" name="adreess" rows="5" cols="60" class="d-block" maxlength="255" style="resize: none;"></textarea>
+                <textarea id="adreess" name="Adreess" rows="5" cols="60" class="d-block" maxlength="255" style="resize: none;"></textarea>
               </div>
-              <button type="submit" class="btn btn-dark" name="submit">Create Contact</button>
+              <button type="submit" class="btn btn-dark" name="CreateContact">Create Contact</button>
           </form>
           <table class="table caption-top mt-3 ">
             <caption class="TableCaption">Contacts list :</caption>
             <tbody>
-              <tr>
-                <th scope="row">Username</th>
-                <td>Mohamed@gmail.com</td>
-                <td>346655-5333</td>
-                <td>
-                 <br>
-                 <button type="button" onclick="confirm('Are you Sure')" class="btn btn-dark">Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">Signup date</th>
-                <td>Otto</td>
-                <td></td>
-              </tr>
-              <tr>
-                <th scope="row">Last Login</th>
-                <td>Otto</td>
-                <td></td>
-              </tr>
+              <?php
+                 if(isset($empty)){echo $empty ;}
+
+              ?>
+             
             </tbody>
           </table>
       </div>

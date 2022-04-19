@@ -20,15 +20,18 @@ function validateUserName() {
   // input value :
   let usernameV = username.value;
 
+  function styleOutline() {
+    username.setAttribute("style", "outline : 3px solid red");
+}
   if (usernameV.length === 0) {
     userError.innerHTML = "Username is required";
-    username.setAttribute("style", "outline : 3px solid red");
+    styleOutline();
     return false;
   }
   if (!usernameV.match(/^[a-zA-Z0-9 \s]{3,20}$/)) {
     userError.innerHTML =
       " Should contain only numbers and letters & less than 20";
-    username.setAttribute("style", "outline : 3px solid red");
+      styleOutline();
     return false;
   }
   username.setAttribute("style", "outline : 3px solid green");
@@ -43,17 +46,23 @@ function validatePassword() {
   // Styling PasswordError text field
   passwordError.style.color = "red";
 
+  function styleOutline() {
+    password.setAttribute("style", "outline : 3px solid red");
+}
+
   if (passwordV.length === 0) {
     passwordError.innerHTML = "Password is required";
-    password.setAttribute("style", "outline : 3px solid red");
+    styleOutline();
     return false;
   }
   if (passwordV.length < 6) {
     passwordError.innerHTML = "Password must be at least 6 Characters";
+    styleOutline();
     return false;
   }
   if (passwordV.length > 30) {
     passwordError.innerHTML = "Password must be less than 30 Characters";
+    styleOutline();
     return false;
   }
   password.setAttribute("style", "outline: 3px solid green");
