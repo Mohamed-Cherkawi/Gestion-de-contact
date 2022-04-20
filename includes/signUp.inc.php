@@ -2,8 +2,17 @@
 
 if(isset($_POST["SignUp"])) {
 
-    $username = $_POST["Username"];
-    $password = $_POST["Password"];
+     // Filtering function 
+     function test_input($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+        }
+
+    $username = test_input($_POST["Username"]);
+    $password = test_input($_POST["Password"]);
+
 
     // Instantiate SignupContr-class
     /* it is important to have the database file first because the signup class

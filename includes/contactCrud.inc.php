@@ -3,43 +3,66 @@
 require "../Classes/dbh.classes.php";
 require "../Classes/Contact.classes.php";
 
+ // Filtering function 
+ function test_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+    }
+
 if(isset($_POST["CreateContact"])) {
 
-    $name    =    $_POST["Name"];
-    $phone   =    $_POST["Phone"];
-    $email   =    $_POST["Email"];
-    $adrress =    $_POST["Adreess"];
 
+    $name    =    test_input($_POST["Name"]);
+    $phone   =    test_input($_POST["Phone"]);
+    $email   =    test_input($_POST["Email"]);
+    $adrress =    test_input($_POST["Adreess"]);
 
+    
     // Object instanciation :
     
-    $contact = new Contact();
-    $contact->construct($name,$phone,$email,$adrress);
-    $contact->createContact();
+    $createContact = new Contact();
+    $createContact->construct($name,$phone,$email,$adrress);
+    $createContact->createContact();
 
-    
     // Going to back to front page
-    header("location: ../Contact.php");
 
 }
 
-    $contact = new Contact();
-    $contact->getContacts();
+    if(isset($_GET["updateid"])){
 
+    $contactId = $_GET["updateid"];
 
+    $updateContact = new Contact();
+    $updateContact->getContactForUpdate($contactId);
 
+    }
 
-//    //delet
-//    if(isset($_GET["delet"])){
+    if(isset($_POST["updateContact"])) {
 
-//      $contact_id = $_GET["delet"];
+  
+    $name    =    test_input($_POST["Name"]);
+    $phone   =    test_input($_POST["Phone"]);
+    $email   =    test_input($_POST["Email"]);
+    $adrress =    test_input($_POST["Adreess"]);
 
-//      include "../classes/Dbh.php";
-//      include "../classes/contact.php";
+    
+    // Object instanciation :
+    
+    $createContact = new Contact();
+    $createContact->updateContact($name,$phone,$email,$adrress);
 
- 
-// $delet = new contact ();
-// $delet ->delet($contact_id );
+    // Going to back to front page
 
+}
 
-//   }
+    if(isset($_GET["deleteid"])){
+    // Getting the id from the method get :
+
+    $contactId = $_GET["deleteid"];
+
+    $deleteContact = new Contact();
+    $deleteContact->deleteContact($contactId);
+
+    }

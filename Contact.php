@@ -1,6 +1,7 @@
 <?php
-session_start();
-
+require "Classes/dbh.classes.php";
+require "Classes/Contact.classes.php" ;
+$getContact = new Contact();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +13,28 @@ session_start();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="Css/style.css">
 </head>
+<style>
+  /* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: black;
+  border-radius: 3px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+</style>
 <body>
         <!-- Header -->
 <nav class="navbar navbar-dark bg-dark">
@@ -19,51 +42,56 @@ session_start();
         <span class="navbar-brand ">Contacts list</span>
         <div>
                 <span class="me-4" style="color: azure;"><?php if(isset($_SESSION['userName'])) {echo $_SESSION['userName'] ;} ?></span>
-                <a href="login.php" class="LoginLink text-secondary">Log out</a>
+                <a href="includes/logout.inc.php" class="LoginLink text-secondary">Log out</a>
         </div>
     </div>
     
 </nav>
-
-<div class="container mt-5">
-<h1>
-        Contacts
+<h1 class="container mt-5 ">
+        Contacts :
 </h1>
+<div class="container mt-5 d-flex justify-content-center">
+
     <!-- Form -->
           <form method="POST" action="includes/contactCrud.inc.php">
              <div class="d-flex mt-4">
-              <div class="mb-3 w-25">
+              <div class="mb-3 w-50">
                 <label for="exampleFormControlInput1" class="form-label d-block">Enter Your Name</label>
-                <input type="text" name="Name" placeholder="Name" class="form-control" id="exampleFormControlInput1">
+                <input type="text" name="Name" placeholder="Name" class="form-control" id="nameInput" onkeyup="validateName()">
                 </div>
                 <div class="w-50">
                 <label for="exampleFormControlInput1" class="form-label">Enter Your Phone </label>
-                <input type="number" name="Phone" placeholder="Phone" class="form-control" id="exampleFormControlInput1">
+                <input type="number" name="Phone" placeholder="Phone" class="form-control" id="phoneInput" onkeyup="validatePhone()">
                 </div>
               </div>
             
-              <div class="mb-3 w-50">
+              <div class="mb-3 w-100">
                 <label for="exampleFormControlInput1" class="form-label">Enter Your Email</label>
-                <input type="email" name="Email" placeholder="Name" class="form-control" id="exampleFormControlInput1">
+                <div class="d-flex ">
+                <input type="email" name="Email" placeholder="Email" class="form-control text-center align-self-center" id="emailInput" onkeyup="validateEmail()">
+                </div>
               </div>
               <div>
                 <label for="adreess">Adreess</label>
-                <textarea id="adreess" name="Adreess" rows="5" cols="60" class="d-block" maxlength="255" style="resize: none;"></textarea>
+                <textarea id="adreess" placeholder="Type your address (255)" name="Adreess" rows="5" cols="60" class="d-block" maxlength="255" style="resize: none;" onkeyup="validateAddress()"></textarea>
               </div>
-              <button type="submit" class="btn btn-dark" name="CreateContact">Create Contact</button>
+              <button type="submit" class="btn btn-dark mt-2 w-100" name="CreateContact" onclick="return validateForm()">Create Contact</button>
+              <span id="SubmitError" class="text-danger"></span>
           </form>
-          <table class="table caption-top mt-3 ">
+      </div>
+      <table class="table caption-top mt-3 container ">
             <caption class="TableCaption">Contacts list :</caption>
             <tbody>
               <?php
-                 if(isset($empty)){echo $empty ;}
-
+                //  if(isset($empty)){echo $empty ;}
+                $getContact->getContacts();
+                
               ?>
              
             </tbody>
           </table>
-      </div>
 
+  <script src="Js/script3.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

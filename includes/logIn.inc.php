@@ -2,10 +2,17 @@
 
 if(isset($_POST["logIn"])) {
 
-    $username = $_POST["Username"];
-    $password = $_POST["Password"];
-
-  
+    function test_input($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+        }
+        
+    $username = test_input($_POST["Username"]);
+    $password = test_input($_POST["Password"]);
+    
+    
     require "../Classes/dbh.classes.php";
     require "../Classes/login.classes.php";
     require "../Classes/login-contr.classes.php";

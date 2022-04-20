@@ -20,7 +20,7 @@ session_start();
         <div>
                 <span class="me-4" style="color: azure;"><?php if(isset($_SESSION['userName'])) {echo $_SESSION['userName'] ;} ?></span>
                 <a href="Contact.php" class="LoginLink text-secondary me-2">Contact</a>
-                <a href="login.php" class="LoginLink text-secondary">Log out</a>
+                <a href="includes/logout.inc.php" class="LoginLink text-secondary">Log out</a>
         </div>
     </div>
     
