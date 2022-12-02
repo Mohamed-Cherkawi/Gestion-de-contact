@@ -5,4 +5,4 @@ session_unset();
 session_destroy();
 
 // Going to front Page 
-header("location: ../login.php");
+header("location: ../../templates/login.php");

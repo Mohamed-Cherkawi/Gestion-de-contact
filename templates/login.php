@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />  
-    <link rel="stylesheet" href="Css/style.css">
+    <link rel="stylesheet" href="../src/assets/Css/style.css">
 </head>
 <body>
     <!-- Header -->
@@ -23,7 +23,7 @@
     <div class=" container d-flex">
 
       <!-- Form -->
-    <form method="POST" action="includes/logIn.inc.php" id="form" class="p-4 mt-5 ms-3  shadow rounded w-50 Form">
+    <form method="POST" action="../src/includes/logIn.inc.php" id="form" class="p-4 mt-5 ms-3  shadow rounded w-50 Form">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Username</label>
           <input type="text" class="form-control" id="usernameInput" aria-describedby="emailHelp" placeholder="Username" name="Username" max="20" onkeyup="validateUsername()">
@@ -42,7 +42,7 @@
         </div>
       </form>
        <!-- Image -->
-        <img class="w-50 Img2" src="src/Mobile login-rafiki.png" alt="Sign in image">
+        <img class="w-50 Img2" src="../src/assets/img/Mobile%20login-rafiki.png" alt="Sign in image">
       </div>
      
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -51,6 +51,6 @@
     window.history.replaceState(null , null ,window.location.href);
 }
   </script>
-  <script src="Js/script2.js"></script>
+  <script src="../src/assets/Js/script2.js"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <?php
 
-class LoginContr extends Login {
+class LoginContr extends LoginRepo {
 
     private $username;
     private $password ;

@@ -1,7 +1,7 @@
 <?php
 
-require "../Classes/dbh.classes.php";
-require "../Classes/Contact.classes.php";
+require "../util/DbConnection.php";
+require "../repository/ContactRepo.php";
 
  // Filtering function 
  function test_input($data) {
@@ -22,7 +22,7 @@ if(isset($_POST["CreateContact"])) {
     
     // Object instanciation :
     
-    $createContact = new Contact();
+    $createContact = new ContactRepo();
     $createContact->construct($name,$phone,$email,$adrress);
     $createContact->createContact();
 
@@ -34,7 +34,7 @@ if(isset($_POST["CreateContact"])) {
 
     $contactId = $_GET["updateid"];
 
-    $updateContact = new Contact();
+    $updateContact = new ContactRepo();
     $updateContact->getContactForUpdate($contactId);
 
     }
@@ -50,7 +50,7 @@ if(isset($_POST["CreateContact"])) {
     
     // Object instanciation :
     
-    $createContact = new Contact();
+    $createContact = new ContactRepo();
     $createContact->updateContact($name,$phone,$email,$adrress);
 
     // Going to back to front page
@@ -62,7 +62,7 @@ if(isset($_POST["CreateContact"])) {
 
     $contactId = $_GET["deleteid"];
 
-    $deleteContact = new Contact();
+    $deleteContact = new ContactRepo();
     $deleteContact->deleteContact($contactId);
 
     }

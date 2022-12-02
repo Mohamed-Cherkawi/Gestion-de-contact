@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />  
-    <link rel="stylesheet" href="Css/style.css">
+    <link rel="stylesheet" href="../src/assets/Css/style.css">
 </head>
 <style>
   body {
@@ -28,7 +28,7 @@
     <div class="container d-flex">
 
       <!-- Form -->
-    <form method="POST" action="includes/signUp.inc.php" id="form" class="p-4 mt-5 Form shadow rounded w-50">
+    <form method="POST" action="../src/includes/Signup.inc.php" id="form" class="p-4 mt-5 Form shadow rounded w-50">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Username</label>
           <input type="text" class="form-control" id="usernameInput" aria-describedby="emailHelp" placeholder="Username" name="Username" onkeyup="validateUserName()">
@@ -50,7 +50,7 @@
             <span>Already have an account? <a href="login.php" class="ConnexionLinks">Login </a>here</span>
         </div>
       </form>
-      <img class="Img2 w-50" src="src/Mobile login-amico.png" alt="Sign up image">
+      <img class="Img2 w-50" src="../src/assets/img/Mobile%20login-amico.png" alt="Sign up image">
       </div>
 
   
@@ -61,6 +61,6 @@
     window.history.replaceState(null , null ,window.location.href);
 }
   </script>  
-  <script src="Js/script.js"></script>
+  <script src="../src/assets/Js/script.js"></script>
 </body>
 </html>

@@ -13,15 +13,15 @@ if(isset($_POST["logIn"])) {
     $password = test_input($_POST["Password"]);
     
     
-    require "../Classes/dbh.classes.php";
-    require "../Classes/login.classes.php";
-    require "../Classes/login-contr.classes.php";
+    require "../util/DbConnection.php";
+    require "../repository/LoginRepo.php";
+    require "../controllers/LoginContr.php";
 
     $logIn = new LoginContr($username,$password);
 
     // Running error handlers and user signup
     $logIn->loginUser();
     // Going to back to front page
-    header("location: ../Profile.php");
+    header("location: ../../templates/profile.php");
 
 }

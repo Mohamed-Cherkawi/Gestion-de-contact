@@ -1,6 +1,6 @@
 <?php
 
-class SignupContr extends Signup {
+class SignupContr extends SignupRepo {
 
     private $username;
     private $password ;
@@ -13,7 +13,7 @@ class SignupContr extends Signup {
     }
 
     public function signupUser() {
-        if($this->userNameCheck() == false) {
+        if(!$this->userNameCheck()) {
             header("location: ../signUp.php?error=usernameAlreadyTaken");
             exit() ;
         }
@@ -22,17 +22,13 @@ class SignupContr extends Signup {
     }
     private function userNameCheck()
     {
-        $result;
+        $result = true;
       
         if(!$this->checkUser($this->username)) {
             $result = false ;
         }
-        else {
-            $result = true ;
-        }
+
         return $result ;
     }
-    
 
-     
 }

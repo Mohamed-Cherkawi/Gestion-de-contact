@@ -1,6 +1,6 @@
 <?php
 session_start();
-class Contact extends Dbh
+class ContactRepo
 {
 
     private $Name;
@@ -19,75 +19,75 @@ class Contact extends Dbh
     // Getting contact from database
    public function createContact()
     {
-        $stmt = $this->connect()->prepare('INSERT INTO  contacts (Contact_id,Name,Phone,Email,Address) VALUES (' . $_SESSION['userid'] . ',?,?,?,?);');
+        $stmt = DbConnection::connect()->prepare('INSERT INTO  contacts (Contact_id,Name,Phone,Email,Address) VALUES (' . $_SESSION['userid'] . ',?,?,?,?);');
 
         // if the actual exceution of the sql statement fails to database :
         if (!$stmt->execute(array($this->Name , $this->Phone , $this->Email , $this->Address))) {
             $stmt = null;
-            header("location: ../Contact.php?error=stmtfailed");
+            header("location: ../ContactRepo.php?error=stmtfailed");
             exit();
         }
-        header("location: ../Contact.php");
+        header("location: ../ContactRepo.php");
     }
 
-   public function getContacts()
+   public static function getContacts()
     {
-        $stmt = $this->connect()->prepare('SELECT * FROM contacts WHERE Contact_id = ?');
+        $stmt = DbConnection::connect()->prepare('SELECT * FROM contacts WHERE Contact_id = ?');
         if (!$stmt->execute(array($_SESSION['userid']))) {
             $stmt = null;
-            header("location: ../Contact.php?error=stmtfailed");
+            header("location: ../ContactRepo.php?error=stmtfailed");
             exit();
         }
        
         $contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        foreach($contacts as $data) {
-        echo ' 
-        <tr>
+         if( $contacts != null ){
+             foreach($contacts as $data) {
+                 echo ' 
+         <tr>
          <th scope="row"> '. $data['Name'] .'</th>
          <td>'. $data['Phone'] .'</td>
          <td>'. $data['Email'] .'</td>
          <td>'. $data['Address'] .'</td>
          <td>
-          <button type="button" class="btn btn-dark"><a href=" includes/contactCrud.inc.php?updateid='.$data['id'].'" style="text-decoration : none; color: white ;">Edit&nbsp&nbsp</a></button>
-          <button type="button" class="btn btn-dark"><a href=" includes/contactCrud.inc.php?deleteid='.$data['id'].'" style="text-decoration : none; color: white ;">Delete</a></button>
+          <button type="button" class="btn btn-dark"><a href=" includes/contactCrud.inc.php?updateid='.$data['Contact_id'].'" style="text-decoration : none; color: white ;">Edit&nbsp&nbsp</a></button>
+          <button type="button" class="btn btn-dark"><a href=" includes/contactCrud.inc.php?deleteid='.$data['Contact_id'].'" style="text-decoration : none; color: white ;">Delete</a></button>
          </td>
          </tr>
          ';
-        }
-
+             }
+         }
     }
 
         function deleteContact($contactId) {
 
-        $stmt = $this->connect()->prepare('DELETE FROM contacts WHERE id = ?');
+        $stmt = DbConnection::connect()->prepare('DELETE FROM contacts WHERE Contact_id = ?');
 
         if($stmt->execute(array($contactId))) {
 
         $stmt = null ;
-        header("location: ../Contact.php?error=failedToDelete");
+        header("location: ../ContactRepo.php?error=failedToDelete");
         exit();
         
         }
 
-        header("location: ../Contact.php");
+        header("location: ../ContactRepo.php");
 
     }
         
         function getContactForUpdate($contactId) {
 
-            $stmt = $this->connect()->prepare('SELECT * FROM contacts WHERE id = ?');
+            $stmt = DbConnection::connect()->prepare('SELECT * FROM contacts WHERE Contact_id = ?');
 
             if(!$stmt->execute(array($contactId))) {
 
                 $stmt = null ;
-                header("location: ../Contact.php?error=stmtFailed");
+                header("location: ../ContactRepo.php?error=stmtFailed");
                 exit();
             }
             if($stmt->rowCount() == 0)
             {
                 $stmt = null ;
-                header("location: ../Contact.php?error=DataNotFound");
+                header("location: ../ContactRepo.php?error=DataNotFound");
                 $empty = 'No contacts yet';
                 exit();
             }
@@ -132,7 +132,7 @@ class Contact extends Dbh
                         <label for="adreess">Adreess</label>
                         <textarea id="adreess" name="Adreess" rows="5" cols="60" class="d-block" maxlength="255" style="resize: none;">'.$data['Address'] .'</textarea>
                       </div>
-                      <button type="submit" class="btn btn-dark mt-2 w-100" name="updateContact">Update Contact</button>
+                      <button type="submit" class="btn btn-dark mt-2 w-100" name="updateContact">Update ContactRepo</button>
                   </form> 
               </div>
               <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -144,14 +144,14 @@ class Contact extends Dbh
 
         function updateContact($Name,$Phone,$Email,$Address) {
             
-            $stmt = $this->connect()->prepare('UPDATE  contacts SET Name= ?, Phone= ?, Email= ?, Address=? WHERE Contact_id = ?');
+            $stmt = DbConnection::connect()->prepare('UPDATE  contacts SET Name= ?, Phone= ?, Email= ?, Address=? WHERE Contact_id = ?');
 
         // if the actual exceution of the sql statement fails to database :
             if (!$stmt->execute(array($Name,$Phone,$Email,$Address,$_SESSION['userid']))) {
             $stmt = null;
-            header("location: ../Contact.php?error=stmtfailed");
+            header("location: ../ContactRepo.php?error=stmtfailed");
             exit();
             }
-            header("location: ../Contact.php");
+            header("location: ../ContactRepo.php");
         }
 }

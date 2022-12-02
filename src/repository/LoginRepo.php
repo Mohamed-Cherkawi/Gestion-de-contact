@@ -1,11 +1,10 @@
 <?php
-    date_default_timezone_set("Africa/Casablanca");
 
-    class Login extends Dbh {
+    class LoginRepo {
 
         // Quotation marks acts like a placeholder to fill out later with the execute method
         protected function getUser($user,$pass) {
-            $stmt = $this->connect()->prepare('SELECT Password FROM users WHERE userName = ?;');
+            $stmt = DbConnection::connect()->prepare('SELECT Password FROM users WHERE userName = ?;');
 
             // if the actual exceution of the sql statement fails to database :
             if(!$stmt->execute(array($user))) {
@@ -27,7 +26,7 @@
                 exit();
             }
             else if($pass == $getpass[0]['Password']){
-                    $stmt = $this->connect()->prepare('SELECT * FROM users WHERE userName = ? AND Password = ?;');
+                    $stmt = DbConnection::connect()->prepare('SELECT * FROM users WHERE userName = ? AND Password = ?;');
 
                     if(!$stmt->execute(array($user,$pass))) {
                         $stmt = null ;
@@ -41,10 +40,11 @@
             session_start();
             $_SESSION['userid'] = $user["id"];
             $_SESSION['userName'] = $user["userName"];
-            $_SESSION['signupD'] = $user["date"] ;
+            $_SESSION['signupD'] = $user["sign_up_date"] ;
 
             // Current date and time
-            $date = date("l , d M  Y H:i:s A");
+            date_default_timezone_set("Africa/Casablanca");
+            $date = date("l , M  Y  h:i:s A");
 
             $_SESSION['lastLogin'] = $date;
 

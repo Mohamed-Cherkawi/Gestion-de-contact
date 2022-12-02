@@ -20,15 +20,14 @@ if(isset($_POST["SignUp"])) {
     be loaded first and the signup control class needs to have methods from
     inside the sign up class (Oredering is important) .
     */
-    require "../Classes/dbh.classes.php";
-    require "../Classes/signUp.classes.php";
-    require "../Classes/signup-contr.classes.php";
+    require "../util/DbConnection.php";
+    require "../repository/SignupRepo.php";
+    require "../controllers/SignupContr.php";
 
     $signUp = new SignupContr($username,$password);
 
     // Running error handlers and user signup
-    $signUp->signupUser();
-    // Going to back to front page
-    header("location: ../Profile.php");
+    $signUp -> signupUser();
+    header("location: ../../templates/login.php");
 
 }
